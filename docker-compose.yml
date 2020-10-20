@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  #app:
+  #  build: ./
+  #  volumes:
+  #    - ./:/usr/src/app
+  #  ports:
+  #    - "8000:8000"
+  #  networks:
+  #    - examplenetwork
+  ### PostgreSQL Server Container ##################################
+  postgres:
+    build: ./.docker/postgres
+    volumes:
+      - db-postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: exampledb
+      POSTGRES_USER: exampleuser
+      POSTGRES_PASSWORD: examplepassword
+    networks:
+      - examplenetwork
+
+  ### MySQL Server Container ##################################
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: exemplerootpassword
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-mysql:/var/lib/mysql
+    networks:
+      - examplenetwork
+networks:
+  examplenetwork:
+    driver: bridge
+
+volumes:
+  db-postgres:
+  db-mysql:
