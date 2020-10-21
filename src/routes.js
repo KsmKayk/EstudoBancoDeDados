@@ -1,5 +1,41 @@
 const { Router } = require("express");
+const db = require("./db/models")
+const { Op } = require("sequelize");
 
 const routes = Router();
+
+routes.get("/", async (req, res) => {
+  const resultInsert = await db.User.create({firstName: "Diogo", lastName:"Mascarenhas",email:"diogomascarenha@gmail.com"})
+  const resultSelect = await db.User.findAll();
+  const resultSelectWithCondition = await db.User.findAll({
+    where: {
+      first_name: {
+        [Op.like]:'%Kayk%'  
+      }
+      
+    }
+  });
+  const resultUpdate = await db.User.update({firstName: 'Gabriella'},{
+    where: {
+      id: 5
+    }
+  })
+
+  await db.User.create({firstName: "Carol", lastName:"Mascarenhas",email:"diogomascarenha@gmail.com"})
+
+  const resultDelete = await db.User.destroy({
+    where: {
+      first_name: "Carol"
+    }
+  })
+
+  res.json({data: {
+    select: resultSelect,
+    selectWhere: resultSelectWithCondition,
+    insert: resultInsert,
+    update: resultUpdate,
+    delete: resultDelete
+  }})
+})
 
 module.exports = routes;
