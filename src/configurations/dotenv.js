@@ -1,0 +1,20 @@
+require("dotenv").config();
+
+let MYSQLUSER = process.env.MYSQLUSER;
+let MYSQLPASSWORD = process.env.MYSQLPASSWORD;
+let MYSQLDB = process.env.MYSQLDB;
+
+let POSTGRESUSER = process.env.POSTGRESUSER;
+let POSTGRESPASSWORD = process.env.POSTGRESPASS;
+let POSTGRESDB = process.env.POSTGRESDB;
+
+let dotenv = {
+  MYSQLUSER: MYSQLUSER,
+  MYSQLPASSWORD: MYSQLPASSWORD,
+  MYSQLDB: MYSQLDB,
+  POSTGRESUSER: POSTGRESUSER,
+  POSTGRESPASSWORD: POSTGRESPASSWORD,
+  POSTGRESDB: POSTGRESDB,
+};
+
+module.exports = dotenv;

@@ -1,0 +1,16 @@
+
+npx sequelize-cli init // inicia as migrations do sequelize criando as pastas
+
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string // cria um modelo chamado user com  primeiro nome, ultimo nome e email
+
+npx sequelize-cli db:migrate // aplica as migrations
+
+npx sequelize-cli db:migrate:undo // volta a migration
+
+npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js // volta todas as migrations até uma especifica
+
+npx sequelize-cli seed:generate --name demo-user // cria um modelo demo para poder setar as funções default
+
+npx sequelize-cli db:seed:undo // volta seed
+
+npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data // volta seed especifica
