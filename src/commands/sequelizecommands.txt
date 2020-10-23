@@ -1,7 +1,7 @@
 
 npx sequelize-cli init // inicia as migrations do sequelize criando as pastas
 
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string // cria um modelo chamado user com  primeiro nome, ultimo nome e email
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string --underscored // cria um modelo chamado user com  primeiro nome, ultimo nome e email
 
 npx sequelize-cli db:migrate // aplica as migrations
 
