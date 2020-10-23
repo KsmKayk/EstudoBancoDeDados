@@ -1,0 +1,12 @@
+post { 
+
+{
+	"text":"Um texto de batata",
+	"isTrue":false,
+	"integerNumber":65,
+	"decimal":24.44,
+	"dateOnly":"23/05/2000",
+	"dateTime":"11/11/2000 12:00:20"
+}
+
+}
