@@ -17,6 +17,35 @@ module.exports = {
     const resultInsert = await db.DbTest.create({text, isTrue,integerNumber,decimal,dateOnly:dateOnlyFormated,dateTime:dateTimeFormated})
     res.json(resultInsert)
   },
-  async update(req, res) {},
-  async delete(req, res) {},
+  async update(req, res) {
+    const {text, isTrue, integerNumber,decimal,dateOnly,dateTime,id} = req.body;
+    let dateOnlyMoment = moment(dateOnly,"DD-MM-YYYY")
+    let dateTimeMoment = moment(dateTime,"DD-MM-YYYY hh:mm:ss")
+    let dateOnlyFormated = dateOnlyMoment.format("YYYY-MM-DD")
+    let dateTimeFormated = dateTimeMoment.format("YYYY-MM-DD hh:mm:ss")
+    const resultUpdate = await db.DbTest.update({text, isTrue, integerNumber,decimal,dateOnly:dateOnlyFormated,dateTime:dateTimeFormated},{
+      where: {
+        id: id
+      }
+    })
+
+    if(resultUpdate == 1) {
+      res.json({status: `Instância de valor ` + id + " atualizada com sucesso, codigo de status: " + resultUpdate})
+    } else {
+      res.json({error: "Houve um erro, codigo de status: " + resultUpdate})
+    }
+  },
+  async delete(req, res) {
+    const {id} = req.body;
+    const resultDelete = await db.DbTest.destroy({
+      where: {
+        id:id
+      }
+    })
+    if(resultDelete == 1) {
+      res.json({status: `Instância de valor ` + id + " deletada com sucesso, codigo de status: " + resultDelete})
+    } else {
+      res.json({error: "Houve um erro, codigo de status: " + resultDelete})
+    }
+  },
 }
