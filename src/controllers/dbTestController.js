@@ -5,8 +5,20 @@ const moment = require('moment');
 
 module.exports = {
   async index(req, res) {
-    const resultSelect = await db.DbTest.findAll();
-    res.json(resultSelect)
+    const text = req.query.text
+    if(text == null || text == undefined || text == "") {
+      const resultSelect = await db.DbTest.findAll();
+      res.json(resultSelect)
+    } else {
+      const resultSelect = await db.DbTest.findAll({
+        where: {
+          text:{
+           [Op.like]:`%${text}%`
+          }
+        }
+      })
+      res.json(resultSelect)
+    }
   },
   async store(req, res) {
     const {text, isTrue, integerNumber,decimal,dateOnly,dateTime} = req.body;
